@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html ng-app="gattApp">
+
+<head>
+    <title> GATT Explorer form</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="styles/gatt.css" />
+
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="app.js"></script>
+    <script src="scripts/gattController.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>GATT Explorer form</h2>
+        <form ng-controller="gattController as gatt" class="gattForm" ng-submit="submit()">
+            <label for="Profile"> GATT Profile </label>
+            <div class="addServices gatt-right">
+                <label for="Service">Service</label>
+                <span class="glyphicon glyphicon-plus" ng-click="gatt.addService()"></span>
+            </div>
+            <br>
+            <div class="form-group ">
+                <input type="text" class="form-control gatt-input-margin-top" placeholder="GATT description (Example: Accent IBKS105)" ng-model="gatt.description">
+            </div>
+            <div class="services" ng-repeat="service in gatt.services">
+                <div class="service">
+                    <div class="gatt-right">
+                        <label for="characteristic">Characteristic</label>
+                        <span class="glyphicon glyphicon-plus addCharacteristic" ng-click="gatt.addCharacteristic(service.id)"></span>
+                    </div>
+                    <br>
+                    <span class="glyphicon glyphicon-minus removeService" ng-show="$last" ng-click="gatt.removeService(service.id)"></span>
+                    <label for="Service">Service:</label>
+                    <div class="form-group ">
+                        <input type="text" class="form-control" placeholder="UUID (Example: 0000180a-0000-1000-8000-00805f9b34fb)" ng-model="service.uuid">
+                        <input type="text" class="form-control gatt-input-margin-top" placeholder="Name (Example: Device Information)" ng-model="service.name">
+                    </div>
+                </div>
+                <div class="characteristics">
+                    <div class="characteristic" ng-repeat="characteristic in service.characteristics">
+                        <span class="glyphicon glyphicon-minus removeCharacteristic" ng-show="$last" ng-click="gatt.removeCharacteristic(service.id, characteristic.id) "></span>
+                        <label for="characteristic ">Characteristic:</label>
+                        <input type="text" class="form-control" placeholder="UUID (Example: 00002a29-0000-1000-8000-00805f9b34fb)" ng-model="characteristic.uuid">
+                        <input type="text" class="form-control gatt-input-margin-top" placeholder="Name (Example: Manufacturer Name String)" ng-model="characteristic.name">
+                        <input type="text" class="form-control gatt-input-margin-top" placeholder="Format (Example: 0x19)" ng-model="characteristic.format">
+                        <input type="text" class="form-control gatt-input-margin-top" placeholder="Access (Example: r)" ng-model="characteristic.access">
+                    </div>
+                </div>
+            </div>
+            <br>
+            <button ng-click="gatt.submit()" class="btn btn-default ">Submit</button>
+        </form>
+        <br>
+    </div>
+</body>
+
+</html>

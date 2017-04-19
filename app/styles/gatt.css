@@ -1,0 +1,28 @@
+.gattForm {
+    border: solid #adb9cc 1px;
+    background: #e0eaff;
+    padding: 16px;
+}
+
+.services {
+    border: solid #adb9cc 1px;
+    background: #edf3ff;
+    padding: 16px;
+    margin-top: 10px;
+}
+
+.characteristics {
+    padding-left: 45px;
+}
+
+.addServices {
+    padding-right: 16px;
+}
+
+.gatt-right {
+    float: right;
+}
+
+.gatt-input-margin-top {
+    margin-top: 5px;
+}
